@@ -1,0 +1,19 @@
+# Raw and prepared datasets
+data/superstore.csv
+data/superstore_sql.csv
+
+# Python cache and virtual environments
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDE settings
+.vscode/
+
+# Operating system files
+.DS_Store
+Thumbs.db
