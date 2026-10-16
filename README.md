@@ -95,8 +95,6 @@ The notebook and SQL scripts also examine monthly trends, category performance, 
 ```text
 Global-Superstore-Analysis/
 ├── data/
-│   ├── superstore.csv
-│   ├── superstore_sql.csv
 │   └── README.md
 ├── notebooks/
 │   └── global_superstore_analysis.ipynb
@@ -252,7 +250,7 @@ The raw dataset is not included in this repository. Please download it from the 
 
 ```text
 Global-Superstore-Analysis/
-├── data/                 # داده اصلی و نسخه آماده‌شده برای SQL
+├── data/                 # راهنمای دریافت داده‌ها
 ├── notebooks/            # نوت‌بوک تحلیل Python
 ├── plots/                # نمودارهای خروجی
 ├── reports/              # گزارش‌های Excel
