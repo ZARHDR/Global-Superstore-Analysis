@@ -121,30 +121,76 @@ Global-Superstore-Analysis/
 └── README.md
 ```
 
-### How to Run the Python Analysis
+### Running the Python Analysis
 
-1. Clone or download this repository.
-2. From the project root, create and activate a virtual environment if desired.
-3. Install dependencies:
+1. Clone the repository and navigate to the project directory:
+
+   ```bash
+   git clone https://github.com/ZARHDR/Global-Superstore-Analysis.git
+   cd Global-Superstore-Analysis
+   ```
+
+2. Create and activate a virtual environment (recommended):
+
+   **Windows (Git Bash):**
+
+   ```bash
+   python -m venv .venv
+   source .venv/Scripts/activate
+   ```
+
+   **macOS / Linux:**
+
+   ```bash
+   python3 -m venv .venv
+   source .venv/bin/activate
+   ```
+
+3. Install the required dependencies:
 
    ```bash
    pip install -r requirements.txt
    ```
 
-4. Open `notebooks/global_superstore_analysis.ipynb` in Jupyter Notebook or VS Code.
-5. Run the notebook cells in order. The notebook expects the source dataset at `data/superstore.csv`.
-6. Review generated charts in `plots/` and the Excel workbook in `reports/`.
+4. Download the [Global Superstore dataset from Kaggle](https://www.kaggle.com/datasets/fatihilhan/global-superstore-dataset) and place `superstore.csv` in the `data/` directory. The dataset is not included in this repository.
+
+5. Open `notebooks/global_superstore_analysis.ipynb` in Jupyter Notebook or VS Code.
+
+6. Run the notebook cells in order. The notebook expects the source dataset at `data/superstore.csv`.
+
+7. Review the generated charts in `plots/` and the Excel workbook in `reports/`.
 
 ### How to Run the SQL Analysis
 
-The SQL script uses **Microsoft SQL Server / T-SQL** and expects a database named `GlobalSuperstoreDB` with the prepared table `dbo.superstore_sql_fixed`.
+This project uses **Microsoft SQL Server and T-SQL**. The SQL analysis expects a database named `GlobalSuperstoreDB` and a prepared table named `dbo.superstore_sql_fixed`.
 
-1. Run `prepare_sql_data.py` from the project root to generate `data/superstore_sql.csv` from `data/superstore.csv`.
-2. Import `data/superstore_sql.csv` into SQL Server and create/populate the table `dbo.superstore_sql_fixed`. The SQL script expects this table to exist.
-3. Open `SQL/global_superstore_analysis.sql` in SQL Server Management Studio (SSMS).
-4. Confirm the database and table names, then execute the queries in sections.
+1. **Prepare the SQL-ready dataset**
 
-**Data type note:** the imported SQL table used during this analysis stores fields as text. The queries use `TRY_CONVERT` to convert numeric and date values for calculations. For a production-quality database, define appropriate numeric and date column types during import.
+   From the project root, run:
+
+   ```bash
+   python prepare_sql_data.py
+   ```
+
+   This script reads `data/superstore.csv` and generates `data/superstore_sql.csv`. Make sure the original dataset has been downloaded and placed in the `data/` directory first.
+
+2. **Set up the database and table**
+
+   In SQL Server, create the `GlobalSuperstoreDB` database if it does not already exist. Import `data/superstore_sql.csv` into this database and create/populate the table `dbo.superstore_sql_fixed`.
+
+   Ensure that the imported column names match those referenced in the SQL script.
+
+3. **Open the SQL script**
+
+   Open `SQL/global_superstore_analysis.sql` in SQL Server Management Studio (SSMS).
+
+4. **Verify and run the queries**
+
+   Confirm that the database and table names match your SQL Server setup, then execute the queries section by section.
+
+**Data type note:** The table used in this analysis stores its imported fields as text. The queries use `TRY_CONVERT` to convert numeric and date values when needed. For a production-quality database, define appropriate numeric and date column types during import.
+
+**Important:** The raw dataset and the generated SQL-ready CSV are not included in this repository. Download the original dataset from the [Kaggle source](https://www.kaggle.com/datasets/fatihilhan/global-superstore-dataset) before running the analysis.
 
 ### Limitations and Next Steps
 
@@ -260,40 +306,76 @@ Global-Superstore-Analysis/
 └── README.md
 ```
 
-### اجرای تحلیل Python
+### اجرای تحلیل با Python
 
-۱. مخزن را دریافت کنید.
+۱. مخزن پروژه را دریافت کرده و وارد پوشه آن شوید:
 
-۲. از ریشه پروژه، در صورت تمایل محیط مجازی بسازید و فعال کنید.
+```bash
+git clone https://github.com/ZARHDR/Global-Superstore-Analysis.git
+cd Global-Superstore-Analysis
+```
 
-۳. کتابخانه‌ها را نصب کنید:
+۲. یک محیط مجازی ایجاد و فعال کنید (پیشنهاد می‌شود):
+
+**ویندوز (Git Bash):**
+
+```bash
+python -m venv .venv
+source .venv/Scripts/activate
+```
+
+**macOS / Linux:**
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
+۳. کتابخانه‌های موردنیاز پروژه را نصب کنید:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-۴. فایل `notebooks/global_superstore_analysis.ipynb` را در Jupyter Notebook یا VS Code باز کنید.
+۴. مجموعه‌داده‌ی [Global Superstore را از Kaggle دانلود کنید](https://www.kaggle.com/datasets/fatihilhan/global-superstore-dataset) و فایل `superstore.csv` را در پوشه‌ی `data/` قرار دهید. فایل داده خام در این مخزن منتشر نشده است.
 
-۵. سلول‌ها را به‌ترتیب اجرا کنید. مسیر مورد انتظار داده اصلی `data/superstore.csv` است.
+۵. فایل `notebooks/global_superstore_analysis.ipynb` را در Jupyter Notebook یا VS Code باز کنید.
 
-۶. نمودارهای پوشه `plots/` و فایل Excel در `reports/` را بررسی کنید.
+۶. سلول‌های نوت‌بوک را به‌ترتیب اجرا کنید. نوت‌بوک انتظار دارد فایل داده در مسیر `data/superstore.csv` قرار داشته باشد.
+
+۷. نمودارهای تولیدشده را در پوشه‌ی `plots/` و جدول‌های خروجی را در فایل Excel موجود در پوشه‌ی `reports/` بررسی کنید.
 
 ### اجرای تحلیل SQL
 
-اسکریپت SQL برای **Microsoft SQL Server و زبان T-SQL** نوشته شده و لازم است  پایگاه داده‌ای با نام `GlobalSuperstoreDB` و جدول آماده‌شده `dbo.superstore_sql_fixed` وجود داشته باشد.
+این پروژه از **Microsoft SQL Server و زبان T-SQL** استفاده می‌کند. برای اجرای تحلیل‌ها، دیتابیسی با نام `GlobalSuperstoreDB` و جدولی با نام `dbo.superstore_sql_fixed` موردنیاز است.
 
-۱. از ریشه پروژه، `prepare_sql_data.py` را اجرا کنید تا فایل `data/superstore_sql.csv` ساخته شود.
+۱. **آماده‌سازی داده‌ها برای SQL**
 
-۲. فایل CSV را وارد SQL Server کنید و جدول `dbo.superstore_sql_fixed` را ایجاد و پر کنید. اسکریپت SQL  فرض می‌کند این جدول وجود دارد.
+از مسیر اصلی پروژه، دستور زیر را اجرا کنید:
 
-۳. فایل `SQL/global_superstore_analysis.sql` را در SQL Server Management Studio (SSMS) باز کنید.
+```bash
+python prepare_sql_data.py
+```
 
-۴. نام پایگاه داده و جدول را بررسی کنید و پرس‌وجوها را بخش‌به‌بخش اجرا کنید.
+این اسکریپت فایل `data/superstore.csv` را می‌خواند و فایل `data/superstore_sql.csv` را تولید می‌کند. پیش از اجرای اسکریپت، فایل داده اصلی باید از منبع معرفی‌شده دانلود و در پوشه `data/` قرار گرفته باشد.
 
-**نکته درباره نوع داده‌ها**
-در نسخه‌ی فعلی پایگاه داده‌ی این پروژه، ستون‌های جدول به‌صورت متنی (`VARCHAR`) ذخیره شده‌اند. بنابراین، برای انجام محاسبات عددی و تحلیل تاریخ‌ها، از `TRY_CONVERT` در کوئری‌های SQL استفاده شده است. این تابع تلاش می‌کند مقادیر را به نوع داده‌ی موردنظر تبدیل کند و در صورت نامعتبر بودن مقدار، `NULL` برمی‌گرداند.
+۲. **ایجاد دیتابیس و جدول**
 
-در یک پیاده‌سازی استانداردتر، می‌توان هنگام ایجاد جدول و ورود داده‌ها، نوع داده‌ی مناسب هر ستون، مانند `DECIMAL` برای مقادیر عددی و `DATE` برای تاریخ‌ها، را تعیین کرد.
+در SQL Server، در صورت نبودن دیتابیس `GlobalSuperstoreDB`، آن را ایجاد کنید. سپس فایل `data/superstore_sql.csv` را در این دیتابیس وارد کرده و جدول `dbo.superstore_sql_fixed` را ایجاد و با داده‌ها پر کنید.
+
+نام ستون‌های واردشده باید با نام ستون‌های استفاده‌شده در اسکریپت SQL مطابقت داشته باشد.
+
+۳. **باز کردن اسکریپت SQL**
+
+فایل `SQL/global_superstore_analysis.sql` را در محیط SQL Server Management Studio (SSMS) باز کنید.
+
+۴. **بررسی و اجرای کوئری‌ها**
+
+نام دیتابیس و جدول را با تنظیمات SQL Server خود تطبیق دهید و سپس کوئری‌ها را بخش‌به‌بخش اجرا کنید.
+
+**نکته درباره نوع داده‌ها:** در جدولی که برای این تحلیل استفاده شده، ستون‌های واردشده به‌صورت متنی ذخیره شده‌اند. کوئری‌ها برای انجام محاسبات، در صورت نیاز از `TRY_CONVERT` جهت تبدیل مقادیر عددی و تاریخ استفاده می‌کنند. برای طراحی یک دیتابیس مناسب محیط عملیاتی، بهتر است هنگام وارد کردن داده‌ها، نوع‌های داده‌ای عددی و تاریخ به‌درستی تعریف شوند.
+
+**توجه:** فایل داده خام و فایل CSV آماده‌شده برای SQL در این مخزن قرار ندارند. برای اجرای تحلیل، ابتدا مجموعه‌داده را از [منبع آن در Kaggle](https://www.kaggle.com/datasets/fatihilhan/global-superstore-dataset) دانلود کنید.
 
 ### محدودیت‌ها و مسیر توسعه
 
